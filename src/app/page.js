@@ -227,7 +227,7 @@ export default function WaitlistHome() {
 
       {/* Footer */}
       <footer className="max-w-xl w-full mx-auto text-center text-xs text-gray-400">
-        © {new Date().getFullYear()} Onbu • onbu.vercel.app
+        © 2026 Onbu • onbu.vercel.app
       </footer>
     </main>
   );
