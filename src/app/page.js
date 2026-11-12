@@ -1,69 +1,169 @@
-import Image from "next/image";
+"use client";
 
-export default function Home() {
+import { useState } from "react";
+
+export default function WaitlistHome() {
+  const [lang, setLang] = useState("en");
+
+  const content = {
+    en: {
+      badge: "Early Access Waitlist",
+      headline: "Onbu",
+      subtext:
+        "Create a free online shop in seconds. Upload your products, add your prices, and get a link to share anywhere—even if you are starting with zero capital.",
+      pillars: [
+        {
+          title: "1. Your Shop Link",
+          desc: "List your goods and prices cleanly without stress.",
+        },
+        {
+          title: "2. Business Directory",
+          desc: "Let buyers find you online or at your physical shop.",
+        },
+        {
+          title: "3. Free Promotion",
+          desc: "We feature your business on Onbu social media.",
+        },
+      ],
+      formLabel: "Save your shop name early",
+      placeholder: "Enter your email address",
+      button: "Join the Waitlist",
+      note: "Free to join. Made for small businesses and new hustlers.",
+      alertMsg: "You are on the Onbu waitlist! We will message you soon.",
+    },
+    ha: {
+      badge: "Jerin Masu Jira (Early Access)",
+      headline: "Onbu",
+      subtext:
+        "Bude shagonka na yanar gizo kyauta cikin sakan kadan. Saka hotunan kayanka da farashinsu, ka samu link da zaka tura wa kwastomomi—ko da baka da jari a hannu.",
+      pillars: [
+        {
+          title: "1. Link Din Shagonka",
+          desc: "Jera kayanka da farashinsu cikin tsari ba tare da wahala ba.",
+        },
+        {
+          title: "2. Rumbun Kasuwanci",
+          desc: "Mutane su ganka a yanar gizo ko su gano ainihin shagonka.",
+        },
+        {
+          title: "3. Talla Kyauta",
+          desc: "Muna tallata kasuwancinka a shafukan sada zumunta na Onbu.",
+        },
+      ],
+      formLabel: "Yi rajista tun yanzu",
+      placeholder: "Saka adireshin email dinka",
+      button: "Shiga Jerin Masu Jira",
+      note: "Kyauta ne. An yi shi ne don kananan yan kasuwa da masu tasowa.",
+      alertMsg: "Mun karbi sunanka a jerin Onbu! Za mu tuntube ka nan ba da jimawa ba.",
+    },
+  };
+
+  const t = content[lang];
+
   return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert h-5 w-[100px]"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the{" "}
-            <code className="rounded bg-black/[.06] px-1.5 py-0.5 font-mono text-[0.9em] dark:bg-white/[.08]">
-              page.js
-            </code>{" "}
-            file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
+    <main className="min-h-screen bg-slate-950 text-slate-100 flex flex-col items-center justify-center p-6 selection:bg-emerald-500 selection:text-slate-950">
+      <div className="max-w-md w-full text-center">
+        
+        {/* Language Toggle */}
+        <div className="flex justify-center mb-6">
+          <div className="inline-flex bg-slate-900 p-1 rounded-full border border-slate-800">
+            <button
+              type="button"
+              onClick={() => setLang("en")}
+              className={`px-3.5 py-1 rounded-full text-xs font-semibold transition-colors cursor-pointer ${
+                lang === "en"
+                  ? "bg-emerald-500 text-slate-950"
+                  : "text-slate-400 hover:text-white"
+              }`}
             >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
+              English
+            </button>
+            <button
+              type="button"
+              onClick={() => setLang("ha")}
+              className={`px-3.5 py-1 rounded-full text-xs font-semibold transition-colors cursor-pointer ${
+                lang === "ha"
+                  ? "bg-emerald-500 text-slate-950"
+                  : "text-slate-400 hover:text-white"
+              }`}
             >
-              Learning
-            </a>{" "}
-            center.
+              Hausa
+            </button>
+          </div>
+        </div>
+
+        {/* Brand Tag */}
+        <div className="inline-block mb-4 px-3 py-1 bg-emerald-500/10 border border-emerald-500/20 rounded-full text-emerald-400 text-xs font-semibold tracking-wide uppercase">
+          {t.badge}
+        </div>
+
+        {/* Main Headline */}
+        <h1 className="text-4xl sm:text-5xl font-black tracking-tight mb-4 text-white">
+          {t.headline}
+        </h1>
+
+        {/* Value Proposition */}
+        <p className="text-slate-300 text-base sm:text-lg mb-6 leading-relaxed">
+          {t.subtext}
+        </p>
+
+        {/* 3 Core Pillars */}
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-2.5 mb-8 text-left">
+          {t.pillars.map((pillar, index) => (
+            <div
+              key={index}
+              className="bg-slate-900/80 p-3.5 rounded-xl border border-slate-800"
+            >
+              <p className="text-emerald-400 font-bold text-xs mb-1">
+                {pillar.title}
+              </p>
+              <p className="text-xs text-slate-400 leading-snug">
+                {pillar.desc}
+              </p>
+            </div>
+          ))}
+        </div>
+
+        {/* Waitlist Form Box */}
+        <div className="bg-slate-900 p-4 sm:p-6 rounded-2xl border border-slate-800 shadow-xl text-left">
+          <label
+            htmlFor="email"
+            className="block text-xs font-medium text-slate-400 uppercase tracking-wider mb-2"
+          >
+            {t.formLabel}
+          </label>
+          <form
+            onSubmit={(e) => {
+              e.preventDefault();
+              alert(t.alertMsg);
+            }}
+            className="space-y-3"
+          >
+            <input
+              type="email"
+              id="email"
+              required
+              placeholder={t.placeholder}
+              className="w-full bg-slate-950 border border-slate-700 rounded-xl px-4 py-3 text-sm text-white placeholder-slate-500 focus:outline-none focus:border-emerald-500 transition-colors"
+            />
+            <button
+              type="submit"
+              className="w-full bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-bold py-3 px-4 rounded-xl text-sm transition-colors shadow-lg shadow-emerald-500/10 cursor-pointer"
+            >
+              {t.button}
+            </button>
+          </form>
+          <p className="text-[11px] text-slate-500 text-center mt-3">
+            {t.note}
           </p>
         </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert h-[14px] w-4"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={14}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
+
+        {/* Footer info */}
+        <div className="mt-10 text-xs text-slate-600 font-mono">
+          onbu.vercel.app
         </div>
-      </main>
-    </div>
+
+      </div>
+    </main>
   );
 }
